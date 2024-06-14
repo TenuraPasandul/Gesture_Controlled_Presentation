@@ -136,6 +136,37 @@ def start_virtual_mouse():
                     pyautogui.press('F5')
                     status = "Beginning Of Presentation"
                     pyautogui.sleep(1)
+                            elif three_fingers_up:
+                    pyautogui.press('esc')
+                    status = "End Of Presentation"
+                    pyautogui.sleep(1)
+
+                elif thumb_and_little_finger_up:
+                    status = "Quit"
+                    break
+
+            else:
+                status = "Student Area"
+
+        else:
+            status = ""
+
+        cv2.line(frame, (0, boundary_line_y), (frame_width, boundary_line_y), (255, 0, 0), 2)
+        cv2.putText(frame, status, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+        cv2.imshow(window_name, frame)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+
+def test_gesture_control():
+    test_window = Toplevel(root)
+    test_window.title("Test Hand Gesture Control")
+    boundary_line_y = 300
+    frame_width, frame_height = 650, 600
 
 
 root.mainloop()
