@@ -168,5 +168,39 @@ def test_gesture_control():
     boundary_line_y = 300
     frame_width, frame_height = 650, 600
 
+    image_paths = ["./img/1.jpg", "./img/2.jpg", "./img/3.jpg"]
+    images = [Image.open(path).resize((400, 300)) for path in image_paths]
+    photos = [ImageTk.PhotoImage(image) for image in images]
+    
+    current_image = tk.Label(test_window)
+    current_image.pack()
+    
+    def update_image(index):
+        current_image.config(image=photos[index])
+        current_image.image = photos[index]
+    
+    update_image(0)
+    image_index = [0]
+    
+    def gesture_control():
+        cap = cv2.VideoCapture(0)
+        window_name = "Gesture Control Test"
+    
+        hand_detector = mp.solutions.hands.Hands()
+        drawing_utils = mp.solutions.drawing_utils
+        status = ""
+    
+        while True:
+            _, frame = cap.read()
+            frame = cv2.flip(frame, 1)
+            rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            output = hand_detector.process(rgb_frame)
+            hands = output.multi_hand_landmarks
+    
+            if hands:
+                hand = hands[0]
+                drawing_utils.draw_landmarks(frame, hand)
+                landmarks = hand.landmark
+
 
 root.mainloop()
