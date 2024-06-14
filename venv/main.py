@@ -71,6 +71,36 @@ def start_virtual_mouse():
 
     thread = threading.Thread(target=set_window_always_on_top, args=(window_name,))
     thread.start()
+    while True:
+
+        power_point_window = None
+        for window in gw.getWindowsWithTitle('PowerPoint'):
+            if window.title.startswith('PowerPoint'):
+                power_point_window = window
+                break
+
+        if power_point_window and power_point_window.isMinimized:
+            show_error_message("PowerPoint is minimized. Gestures are disabled.")
+            time.sleep(1)
+            continue
+
+        _, frame = cap.read()
+        frame = cv2.flip(frame, 1)
+        frame_height, frame_width, _ = frame.shape
+
+        rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        output = hand_detector.process(rgb_frame)
+        hands = output.multi_hand_landmarks
+
+        if hands:
+
+            hand = hands[0]
+            drawing_utils.draw_landmarks(frame, hand)
+            landmarks = hand.landmark
+
+            finger_tips_ids = [4, 8, 12, 16, 20]
+            finger_mcp_ids = [2, 5, 9, 13, 17]
+            fingers_up = []
 
 
 
