@@ -271,6 +271,42 @@ def test_gesture_control():
 
     threading.Thread(target=gesture_control).start()
 
+#frontend
+
+root = tk.Tk()
+root.title("Start Hand Gesture Presentation")
+
+start_button = tk.Button(root, text="Start", command=start_virtual_mouse, font=("Helvetica", 12, "bold"), padx=10, pady=10)
+start_button.pack(pady=20)
+
+test_button = tk.Button(root, text="Test", command=test_gesture_control, font=("Helvetica", 12, "bold"), padx=10, pady=10)
+test_button.pack(pady=20)
+
+gestures_label = tk.Label(root, text="Use the following hand gestures to control the presentation:", font=("Helvetica", 14))
+gestures_label.pack(pady=10)
+
+gesture_image_frame1 = tk.Frame(root, bg='white')
+gesture_image_frame1.pack(pady=30)
+
+
+gesture_left_image = Image.open("./img/thumbsUp.jpg")
+gesture_right_image = Image.open("./img/raise5Fingers.jpg")
+gesture_little_finger_and_thumb = Image.open("./img/little-finger-and-thumb.jpg")
+three_finger_raise_image = Image.open("./img/three-finger-raise.jpg")
+two_finger_raise_image = Image.open("./img/two-finger-raise.jpg")
+
+gesture_left_image = gesture_left_image.resize((100, 100))
+gesture_right_image = gesture_right_image.resize((100, 100))
+gesture_little_finger_and_thumb = gesture_little_finger_and_thumb.resize((100, 100))
+three_finger_raise_image = three_finger_raise_image.resize((100, 100))
+two_finger_raise_image = two_finger_raise_image.resize((100, 100))
+
+gesture_left_tk = ImageTk.PhotoImage(gesture_left_image)
+gesture_right_tk = ImageTk.PhotoImage(gesture_right_image)
+gesture_little_finger_and_thumb_tk = ImageTk.PhotoImage(gesture_little_finger_and_thumb)
+three_finger_raise_tk = ImageTk.PhotoImage(three_finger_raise_image)
+two_finger_raise_tk = ImageTk.PhotoImage(two_finger_raise_image)
+
 
 
 
