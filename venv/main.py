@@ -307,7 +307,35 @@ gesture_little_finger_and_thumb_tk = ImageTk.PhotoImage(gesture_little_finger_an
 three_finger_raise_tk = ImageTk.PhotoImage(three_finger_raise_image)
 two_finger_raise_tk = ImageTk.PhotoImage(two_finger_raise_image)
 
+gesture_left_label = tk.Label(gesture_image_frame1, image=gesture_left_tk, bg='black')
+gesture_left_label.grid(row=0, column=0, padx=20)
+gesture_left_text = tk.Label(gesture_image_frame1, text="Go Previous", font=("Helvetica", 12), bg='white')
+gesture_left_text.grid(row=1, column=0, padx=20)
 
+
+
+gesture_right_label = tk.Label(gesture_image_frame1, image=gesture_right_tk, bg='black')
+gesture_right_label.grid(row=0, column=1, padx=20)
+gesture_right_text = tk.Label(gesture_image_frame1, text="Go Next", font=("Helvetica", 12), bg='white')
+gesture_right_text.grid(row=1, column=1, padx=20)
+
+gesture_little_finger_and_thumb_label = tk.Label(gesture_image_frame1, image=gesture_little_finger_and_thumb_tk, bg='black')
+gesture_little_finger_and_thumb_label.grid(row=0, column=2, padx=20)
+gesture_little_finger_and_thumb_text = tk.Label(gesture_image_frame1, text="Quit", font=("Helvetica", 12), bg='white')
+gesture_little_finger_and_thumb_text.grid(row=1, column=2, padx=20)
+
+two_finger_raise_label = tk.Label(gesture_image_frame1, image=two_finger_raise_tk, bg='black')
+two_finger_raise_label.grid(row=0, column=3, padx=20)
+two_finger_raise_text = tk.Label(gesture_image_frame1, text="Begin of Presentation", font=("Helvetica", 12), bg='white')
+two_finger_raise_text.grid(row=1, column=3, padx=20)
+
+three_finger_raise_label = tk.Label(gesture_image_frame1, image=three_finger_raise_tk, bg='black')
+three_finger_raise_label.grid(row=0, column=4, padx=20)
+three_finger_raise_text = tk.Label(gesture_image_frame1, text="End of Presentation", font=("Helvetica", 12), bg='white')
+three_finger_raise_text.grid(row=1, column=4, padx=20)
+
+gestures_tips = tk.Label(root, text="\tTips: \n\t > Use Right hand to control easily. \n\t > Before Click the Start Button, Open The PowerPoint Presentation. \n\t > if you need to quit, click on video frame (Gesture control test or Hand Gesture controling window) \n\t and press 'q' letter. \n\t > You can check sliding is working or not by clicking on Test button. \n\t > When sliding in powerpoint, do hand gestures above the blue boundary line. \n ", font=("Helvetica", 8), justify='left')
+gestures_tips.pack(pady=10)
 
 
 
