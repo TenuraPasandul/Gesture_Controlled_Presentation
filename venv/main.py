@@ -235,5 +235,44 @@ def test_gesture_control():
                         status = "Next"
                         pyautogui.sleep(1)
 
+                                    elif middle_and_second_finger_up:
+                        status = "Beginning Of Presentation"
+                        pyautogui.sleep(1)
+
+                    elif three_fingers_up:
+                        status = "End Of Presentation"
+                        pyautogui.sleep(1)
+
+                    elif thumb_and_little_finger_up:
+                        status = "Quit"
+                        break
+                else:
+                    status = "Student Area"
+            else:
+                status = ""
+
+
+            cv2.line(frame, (0, boundary_line_y), (frame_width, boundary_line_y), (255, 0, 0), 2)
+            cv2.putText(frame, status, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+
+            cv2.imshow(window_name, frame)
+
+
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+
+        cap.release()
+        cv2.destroyAllWindows()
+
+
+        test_window.destroy()
+
+        show_success_message("Now you can control your slide in PowerPoint presentation")
+
+    threading.Thread(target=gesture_control).start()
+
+
+
+
 
 root.mainloop()
