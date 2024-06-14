@@ -102,6 +102,40 @@ def start_virtual_mouse():
             finger_mcp_ids = [2, 5, 9, 13, 17]
             fingers_up = []
 
+            for tip_id, mcp_id in zip(finger_tips_ids, finger_mcp_ids):
+                tip_y = landmarks[tip_id].y
+                mcp_y = landmarks[mcp_id].y
+                if tip_y < mcp_y:
+                    fingers_up.append(True)
+                else:
+                    fingers_up.append(False)
+
+            thumb_up = fingers_up[0] and not any(fingers_up[1:])
+            all_fingers_up = all(fingers_up)
+
+            thumb_and_little_finger_up = fingers_up[0] and fingers_up[4] and not any(fingers_up[1:4])
+            middle_and_second_finger_up = fingers_up[1] and fingers_up[2] and not any(fingers_up[3:])
+            three_fingers_up = fingers_up[1:4] and not (fingers_up[0] and fingers_up[4])
+
+            hand_y = int(landmarks[8].y * frame_height)
+            is_teacher_area = hand_y < boundary_line_y
+
+            if is_teacher_area:
+
+                if thumb_up:
+                    pyautogui.press('left')
+                    status = "Previous"
+                    pyautogui.sleep(1)
+
+                elif all_fingers_up:
+                    pyautogui.press('right')
+                    status = "Next"
+                    pyautogui.sleep(1)
+
+                elif middle_and_second_finger_up:
+                    pyautogui.press('F5')
+                    status = "Beginning Of Presentation"
+                    pyautogui.sleep(1)
 
 
 root.mainloop()
